@@ -1,0 +1,1044 @@
+{
+  "x-generator": "NSwag v12.0.14.0 (NJsonSchema v9.13.18.0 (Newtonsoft.Json v11.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "My API",
+    "description": "ASP.NET Core Web API",
+    "version": "v1"
+  },
+  "host": "localhost:5001",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json-patch+json",
+    "application/json",
+    "text/json",
+    "application/*+json"
+  ],
+  "paths": {
+    "/token": {
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Token",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Balance/{address}": {
+      "put": {
+        "tags": [
+          "Balance"
+        ],
+        "operationId": "Balance_Observe",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WalletObservationRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "callbackUrl",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Wallet/Label/{label}": {
+      "get": {
+        "tags": [
+          "Label"
+        ],
+        "operationId": "Label_Find",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "label",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "coin",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/Coin"
+            },
+            "x-nullable": false,
+            "enum": [
+              "BTC",
+              "LTC",
+              "BCH",
+              "ETH",
+              "XRP"
+            ]
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Wallet"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Wallet/{address}/Label/{label}": {
+      "put": {
+        "tags": [
+          "Label"
+        ],
+        "operationId": "Label_Create",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "label",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Label"
+        ],
+        "operationId": "Label_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "label",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Transaction": {
+      "put": {
+        "tags": [
+          "Transaction"
+        ],
+        "operationId": "Transaction_Send",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tx",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitTransactionRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "callbackUrl",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "operationId": "Transaction_GetAll",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "filterRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransactionFilterRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Transaction"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Transaction/SendToMany": {
+      "put": {
+        "tags": [
+          "Transaction"
+        ],
+        "operationId": "Transaction_SendToMany",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tx",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitTransactionToManyRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "callbackUrl",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Transaction/{txhash}": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "operationId": "Transaction_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "txhash",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Validate/{address}": {
+      "get": {
+        "tags": [
+          "Validate"
+        ],
+        "operationId": "Validate_Validate",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "currency",
+            "in": "query",
+            "x-schema": {
+              "$ref": "#/definitions/Coin"
+            },
+            "x-nullable": false,
+            "enum": [
+              "BTC",
+              "LTC",
+              "BCH",
+              "ETH",
+              "XRP"
+            ]
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Wallet/{address}": {
+      "get": {
+        "tags": [
+          "Wallet"
+        ],
+        "operationId": "Wallet_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "blocksBeforeConfirmed",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Wallet/{address}/unspent": {
+      "get": {
+        "tags": [
+          "Wallet"
+        ],
+        "operationId": "Wallet_Unspent",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UnTXO"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    },
+    "/Api/v{version}/Wallet": {
+      "put": {
+        "tags": [
+          "Wallet"
+        ],
+        "operationId": "Wallet_CreateWallet",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WalletCreationRequest"
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT token": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Wallet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "balance",
+        "confirmedBalance",
+        "unconfirmedBalance",
+        "coin",
+        "addressType"
+      ],
+      "properties": {
+        "balance": {
+          "type": "number",
+          "description": "Confirmed balance + unconfirmed balance",
+          "format": "decimal"
+        },
+        "confirmedBalance": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "unconfirmedBalance": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "address": {
+          "type": "string"
+        },
+        "coin": {
+          "$ref": "#/definitions/Coin"
+        },
+        "addressType": {
+          "$ref": "#/definitions/AddressType"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Coin": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "BTC",
+        "LTC",
+        "BCH",
+        "ETH",
+        "XRP"
+      ],
+      "enum": [
+        "BTC",
+        "LTC",
+        "BCH",
+        "ETH",
+        "XRP"
+      ]
+    },
+    "AddressType": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Default"
+      ],
+      "enum": [
+        "Default"
+      ]
+    },
+    "WalletObservationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blocksForConfirmation"
+      ],
+      "properties": {
+        "blocksForConfirmation": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coin",
+        "height",
+        "confirmations",
+        "createdTime",
+        "value",
+        "state"
+      ],
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "coin": {
+          "$ref": "#/definitions/Coin"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "confirmations": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "confirmedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "state": {
+          "$ref": "#/definitions/TransactionState"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransactionEntry"
+          }
+        }
+      }
+    },
+    "TransactionState": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "Confirmed",
+        "Unconfirmed",
+        "PendingApproval",
+        "Rejected",
+        "Removed"
+      ],
+      "enum": [
+        "Confirmed",
+        "Unconfirmed",
+        "PendingApproval",
+        "Rejected",
+        "Removed"
+      ]
+    },
+    "TransactionEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "valueChange"
+      ],
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "valueChange": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "SubmitTransactionRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recipientAddress",
+        "amount",
+        "blocksBeforeConfirmed",
+        "feeRate",
+        "minConfirms",
+        "gasPrice",
+        "gasLimit",
+        "lastLedgerSequence"
+      ],
+      "properties": {
+        "recipientAddress": {
+          "type": "string",
+          "description": "Recipient address",
+          "minLength": 1
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "blocksBeforeConfirmed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "feeRate": {
+          "type": "integer",
+          "description": "Fee rate in satoshis/litoshis/atoms per kilobyte.",
+          "format": "int32"
+        },
+        "unspents": {
+          "type": "array",
+          "description": "The unspents to use in the transaction. Each unspent should be in the form prevTxId:nOutput.",
+          "items": {
+            "$ref": "#/definitions/UnTXOId"
+          }
+        },
+        "minConfirms": {
+          "type": "integer",
+          "description": "Minimum number of confirmations unspents going into this transaction should have.",
+          "format": "int32"
+        },
+        "changeAddress": {
+          "type": "string",
+          "description": "Specifies the destination of the change output."
+        },
+        "gasPrice": {
+          "type": "integer",
+          "description": "Custom gas price to be used for sending the transaction",
+          "format": "int32"
+        },
+        "gasLimit": {
+          "type": "integer",
+          "description": "Custom gas limit for the transaction",
+          "format": "int32"
+        },
+        "data": {
+          "type": "string",
+          "description": "Hex data to send to recipient with transaction (can be used to make contract calls)"
+        },
+        "lastLedgerSequence": {
+          "type": "integer",
+          "description": "Absolute max ledger the transaction should be accepted in, whereafter it will be rejected.\n            ",
+          "format": "int32"
+        },
+        "ledgerSequenceDelta": {
+          "type": "string",
+          "description": "Relative ledger height (in relation to the current ledger) that the transaction should be accepted in, whereafter it will be rejected."
+        }
+      }
+    },
+    "UnTXOId": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vout"
+      ],
+      "properties": {
+        "transactionId": {
+          "type": "string"
+        },
+        "vout": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SubmitTransactionToManyRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recipients",
+        "amount",
+        "blocksBeforeConfirmed",
+        "feeRate",
+        "minConfirms"
+      ],
+      "properties": {
+        "recipients": {
+          "type": "array",
+          "description": "Recipient address",
+          "items": {
+            "$ref": "#/definitions/TransactionEntry"
+          }
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "blocksBeforeConfirmed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "feeRate": {
+          "type": "integer",
+          "description": "Fee rate in satoshis/litoshis/atoms per kilobyte.",
+          "format": "int32"
+        },
+        "unspents": {
+          "type": "array",
+          "description": "The unspents to use in the transaction. Each unspent should be in the form prevTxId:nOutput.",
+          "items": {
+            "$ref": "#/definitions/UnTXOId"
+          }
+        },
+        "minConfirms": {
+          "type": "integer",
+          "description": "Minimum number of confirmations unspents going into this transaction should have.",
+          "format": "int32"
+        },
+        "changeAddress": {
+          "type": "string",
+          "description": "Specifies the destination of the change output."
+        }
+      }
+    },
+    "TransactionFilterRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pageNo",
+        "pageSize"
+      ],
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pageNo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "UnTXO": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "numberOfConfirmations",
+        "blockHeight",
+        "value"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/UnTXOId"
+        },
+        "numberOfConfirmations": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "blockHeight": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "value": {
+          "type": "number",
+          "format": "decimal"
+        }
+      }
+    },
+    "WalletCreationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coin",
+        "addressType"
+      ],
+      "properties": {
+        "coin": {
+          "$ref": "#/definitions/Coin"
+        },
+        "addressType": {
+          "$ref": "#/definitions/AddressType"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "JWT token": {
+      "type": "apiKey",
+      "description": "Copy 'Bearer ' + valid JWT token into field",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
